@@ -1,8 +1,14 @@
 package za.co.westcoastexplorers.exploreapp;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,6 +60,30 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 Log.w("DB", "Failed to read value.", error.toException());
             }
         });
+
+
+        // toggle menu
+        findViewById(R.id.menutoggle).setOnClickListener(new View.OnClickListener() {
+            boolean open = true;
+
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    AutoTransition auto = new AutoTransition();
+                    auto.setDuration(200);
+                    TransitionManager.beginDelayedTransition((ViewGroup)findViewById(R.id.cardView), auto);
+                }
+
+                if (open)
+                    findViewById(R.id.menucontainer).setVisibility(View.GONE);
+                else
+                    findViewById(R.id.menucontainer).setVisibility(View.VISIBLE);
+
+                open = !open;
+
+                ( (AppCompatImageView)findViewById(R.id.dropdown)).setImageResource(!open ? R.drawable.ic_arrow_drop_down_black_24dp : R.drawable.ic_arrow_drop_up_black_24dp);
+            }
+        });
     }
 
     @Override
@@ -61,8 +91,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Yzerfontein, and move the camera.
-        LatLng sydney = new LatLng(-33.342506, 18.173862);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Welcome to Yzerfontein"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16.0f));
+        LatLng yzerfontein = new LatLng(-33.342506, 18.173862);
+        mMap.addMarker(new MarkerOptions().position(yzerfontein).title("Welcome to Yzerfontein"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yzerfontein, 16.0f));
+
+        mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 }

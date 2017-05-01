@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">Explore.App</string>
+    <string name="app_name">WC Explorers</string>
 
     <string name="button_splash">Login</string>
+
+    <!-- home page buttons -->
+    <string name="home_attractions">Attractions</string>
+    <string name="home_route">WCEC Route</string>
+    <string name="home_member">Member Login</string>
 </resources>
