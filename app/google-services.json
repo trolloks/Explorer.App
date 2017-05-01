@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "321456851788",
+    "firebase_url": "https://wc-explorer-1493635860971.firebaseio.com",
+    "project_id": "wc-explorer-1493635860971",
+    "storage_bucket": "wc-explorer-1493635860971.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321456851788:android:771d0c0e80c7d0aa",
+        "android_client_info": {
+          "package_name": "za.co.westcoastexplorers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321456851788-17fh0ovmua6pfgimjoqrjn418kjnssco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt6pmhTt32DJS24J0g6GEH8yA5q_U7l1Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
