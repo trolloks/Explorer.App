@@ -123,7 +123,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     AutoTransition auto = new AutoTransition();
-                    auto.setDuration(200);
+                    auto.setDuration(100);
                     TransitionManager.beginDelayedTransition((ViewGroup) findViewById(R.id.cardView), auto);
                 }
 
