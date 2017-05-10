@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,6 +25,7 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +38,8 @@ import java.util.ArrayList;
 
 import za.co.westcoastexplorers.R;
 import za.co.westcoastexplorers.exploreapp.adapters.SingleLineListAdapter;
+import za.co.westcoastexplorers.exploreapp.controller.FireBaseController;
+import za.co.westcoastexplorers.exploreapp.models.Attraction;
 import za.co.westcoastexplorers.exploreapp.models.SingleLineListItem;
 
 /**
@@ -63,27 +67,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         mapFragment.getMapAsync(this);
 
-        // init database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("attractions");
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Object value = dataSnapshot.getValue(Object.class);
-                Log.d("DB", "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("DB", "Failed to read value.", error.toException());
-            }
-        });
-
         // init menu
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -104,6 +87,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         SingleLineListItem item2 = new SingleLineListItem();
         item2.text = getString(R.string.home_route);
         item2.image = R.drawable.ic_directions_car_black_24dp;
+        item2.clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Map.this, Route.class);
+                Map.this.startActivity(intent);
+            }
+        };
         mItems.add(item2);
 
         SingleLineListItem item3 = new SingleLineListItem();
@@ -142,31 +132,25 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Yzerfontein, and move the camera.
-        LatLng yzerfontein = new LatLng(-33.342506, 18.173862);
-        mMap.addMarker(new MarkerOptions().position(yzerfontein).title("Welcome to Yzerfontein"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yzerfontein, 16.0f));
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 909);
-            return;
+        final LatLngBounds.Builder latLngBoundsBuilder = new LatLngBounds.Builder();
+        final ArrayList<LatLng> latLngs = new ArrayList<>();
+
+        for (Attraction attraction : FireBaseController.getInstance().getAttractions()){
+            LatLng latLng = new LatLng(attraction.lat, attraction.lng);
+            latLngs.add(latLng);
+            latLngBoundsBuilder.include(latLng);
+            mMap.addMarker(new MarkerOptions().position(latLng).title(attraction.name));
         }
 
-        mMap.setMyLocationEnabled(true);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSIONCODE){
-
-
-
+        if (latLngs.size() > 1) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBoundsBuilder.build(),
+                    getResources().getDisplayMetrics().widthPixels,
+                    getResources().getDisplayMetrics().heightPixels - (((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300, getResources().getDisplayMetrics()))), // 300 less for title bar and menu
+                    (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, getResources().getDisplayMetrics())));
+        } else if (!latLngs.isEmpty()) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngs.get(0), 14));
         }
-
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

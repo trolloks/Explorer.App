@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     tools:context="za.co.westcoastexplorers.exploreapp.Splash">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/loginbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_splash"/>
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo"/>
 
 </RelativeLayout>

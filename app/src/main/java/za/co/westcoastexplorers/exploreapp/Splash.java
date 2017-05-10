@@ -7,6 +7,7 @@ import android.view.View;
 
 
 import za.co.westcoastexplorers.R;
+import za.co.westcoastexplorers.exploreapp.controller.FireBaseController;
 
 public class Splash extends AppCompatActivity {
 
@@ -15,12 +16,20 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // set listeners
-        findViewById(R.id.loginbutton).setOnClickListener(new View.OnClickListener() {
+        FireBaseController.getInstance().destroy();
+        FireBaseController.getInstance().setFireBaseListener(new FireBaseController.FireBaseListener() {
             @Override
-            public void onClick(View v) {
+            public void onSuccess() {
+                // loaded data
                 Intent intent = new Intent(Splash.this, Map.class);
                 startActivity(intent);
+                // don't come back to splash
+                finish();
+            }
+
+            @Override
+            public void onError() {
+                // error
             }
         });
     }
