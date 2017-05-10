@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -59,7 +60,8 @@ public class Route extends AppCompatActivity implements OnMapReadyCallback {
             LatLng latLng = new LatLng(attraction.lat, attraction.lng);
             latLngs.add(latLng);
             latLngBoundsBuilder.include(latLng);
-            mMap.addMarker(new MarkerOptions().position(latLng).title(attraction.name));
+            MarkerOptions marker = new MarkerOptions().position(latLng).title(attraction.name).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+            mMap.addMarker(marker);
         }
 
         if (latLngs.size() > 1) {

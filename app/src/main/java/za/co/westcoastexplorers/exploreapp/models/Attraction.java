@@ -11,6 +11,11 @@ import com.google.android.gms.maps.model.LatLng;
 public class Attraction {
 
     public String name;
+    public String website;
+    public String number;
+    public String description;
+    public String id;
+    public String placeId;
     public double lat;
     public double lng;
     public View.OnClickListener clickListener;

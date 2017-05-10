@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -30,13 +31,16 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Si
     static class SingleLineListViewHolder extends RecyclerView.ViewHolder {
 
         public View v;
-        public AppCompatTextView tv;
+        public AppCompatTextView tv, dv;
         public AppCompatImageView iv;
+        public ProgressBar p;
 
         public SingleLineListViewHolder(View view) {
             super(view);
             tv = (AppCompatTextView)view.findViewById(R.id.text);
+            dv = (AppCompatTextView)view.findViewById(R.id.description);
             iv = (AppCompatImageView)view.findViewById(R.id.image);
+            p = (ProgressBar) view.findViewById(R.id.progress);
             v = view;
         }
     }
@@ -57,11 +61,26 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Si
         final Attraction item = filteredItems.get(position);
 
         if (holder.tv != null){
-            holder.tv.setText(item.name);
+            if (item.name != null && !item.name.isEmpty()){
+                holder.tv.setText(item.name);
+                holder.tv.setVisibility(View.VISIBLE);
+            } else {
+                holder.tv.setVisibility(View.GONE);
+            }
+        }
+
+        if (holder.dv != null){
+            if (item.description != null && !item.description.isEmpty()){
+                holder.dv.setText(item.description);
+                holder.dv.setVisibility(View.VISIBLE);
+            } else {
+                holder.dv.setVisibility(View.GONE);
+            }
         }
 
         if (holder.iv != null){
             if (item.thumbnailURL != null) {
+                holder.p.setVisibility(View.VISIBLE);
                 AsyncTask<Void, Void, Bitmap> asyncTask = new AsyncTask<Void, Void, Bitmap>() {
                     @Override
                     protected Bitmap doInBackground(Void... voids) {
@@ -73,6 +92,8 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Si
                     @Override
                     protected void onPostExecute(Bitmap bm) {
                         holder.iv.setImageBitmap(bm);
+                        holder.p.setVisibility(View.GONE);
+
                     }
                 };
                 asyncTask.execute();

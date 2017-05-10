@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -99,6 +100,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         SingleLineListItem item3 = new SingleLineListItem();
         item3.text = getString(R.string.home_member);
         item3.image = R.drawable.ic_lock_black_24dp;
+        item3.clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Map.this, Login.class);
+                Map.this.startActivity(intent);
+            }
+        };
         mItems.add(item3);
 
         mAdapter = new SingleLineListAdapter(this, mItems);
@@ -141,7 +149,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             LatLng latLng = new LatLng(attraction.lat, attraction.lng);
             latLngs.add(latLng);
             latLngBoundsBuilder.include(latLng);
-            mMap.addMarker(new MarkerOptions().position(latLng).title(attraction.name));
+            MarkerOptions marker = new MarkerOptions().position(latLng).title(attraction.name).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+            mMap.addMarker(marker);
         }
 
         if (latLngs.size() > 1) {
