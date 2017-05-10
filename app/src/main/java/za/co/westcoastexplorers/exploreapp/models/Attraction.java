@@ -14,5 +14,6 @@ public class Attraction {
     public double lat;
     public double lng;
     public View.OnClickListener clickListener;
+    public String thumbnailURL;
 
 }

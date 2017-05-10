@@ -56,6 +56,8 @@ public class FireBaseController {
                                 item1.lat = (Double)hashMap.get("lat");
                             if (hashMap.containsKey("lng") && hashMap.get("lng") instanceof Double)
                                 item1.lng = (Double)hashMap.get("lng");
+                            if (hashMap.containsKey("thumbnailurl") && hashMap.get("thumbnailurl") instanceof String)
+                                item1.thumbnailURL = (String)hashMap.get("thumbnailurl");
                             mAttractions.add(item1);
                         }
                     }
