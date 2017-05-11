@@ -34,7 +34,7 @@
 
         <activity android:name=".exploreapp.Login"/>
         <activity android:name=".exploreapp.Map"/>
-        <activity android:name=".exploreapp.Route"/>
+        <activity android:name=".exploreapp.Stations"/>
         <activity android:name=".exploreapp.Attractions"/>
         <activity android:name=".exploreapp.AttractionDetail"/>
 

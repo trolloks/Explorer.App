@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">WC Explorers Club</string>
 
-    <string name="button_splash">Login</string>
-
     <!-- home page buttons -->
     <string name="home_attractions">Attractions</string>
-    <string name="home_route">Route</string>
-    <string name="home_member">Member Login</string>
+    <string name="home_route">Bicycle Stations</string>
+    <string name="home_member">Members</string>
 </resources>

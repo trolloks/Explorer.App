@@ -75,11 +75,12 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
                             AppCompatTextView number = (AppCompatTextView)findViewById(R.id.number);
                             if (myPlace.getPhoneNumber() != null) {
                                 number.setText(myPlace.getPhoneNumber());
+                                final CharSequence finalNumber = myPlace.getPhoneNumber();
                                 number.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         Intent i = new Intent(Intent.ACTION_CALL);
-                                        i.setData(Uri.parse("tel:" + myPlace.getPhoneNumber().toString()));
+                                        i.setData(Uri.parse("tel:" + finalNumber.toString()));
                                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(i);
                                     }
@@ -92,11 +93,12 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
                             AppCompatTextView web = (AppCompatTextView)findViewById(R.id.website);
                             if (myPlace.getWebsiteUri() != null) {
                                 web.setText(myPlace.getWebsiteUri().toString());
+                                final Uri finalWebsite = myPlace.getWebsiteUri();
                                 web.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         Intent i = new Intent(Intent.ACTION_VIEW);
-                                        i.setData(myPlace.getWebsiteUri());
+                                        i.setData(finalWebsite);
                                         startActivity(i);
                                     }
                                 });
