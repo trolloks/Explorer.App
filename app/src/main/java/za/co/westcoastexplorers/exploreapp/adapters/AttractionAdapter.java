@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -101,6 +102,7 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Si
 
         if (holder.iv != null){
             if (item.thumbnailURL != null) {
+                ViewCompat.setHasTransientState(holder.v, true);
                 holder.p.setVisibility(View.VISIBLE);
                 AsyncTask<Void, Void, Bitmap> asyncTask = new AsyncTask<Void, Void, Bitmap>() {
                     @Override
@@ -114,7 +116,7 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Si
                     protected void onPostExecute(Bitmap bm) {
                         holder.iv.setImageBitmap(bm);
                         holder.p.setVisibility(View.GONE);
-
+                        ViewCompat.setHasTransientState(holder.v, false);
                     }
                 };
                 asyncTask.execute();
