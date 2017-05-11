@@ -35,7 +35,14 @@
         <activity android:name=".exploreapp.Login"/>
         <activity android:name=".exploreapp.Map"/>
         <activity android:name=".exploreapp.Stations"/>
-        <activity android:name=".exploreapp.Attractions"/>
+        <activity android:name=".exploreapp.Attractions">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity android:name=".exploreapp.AttractionDetail"/>
 
     </application>
