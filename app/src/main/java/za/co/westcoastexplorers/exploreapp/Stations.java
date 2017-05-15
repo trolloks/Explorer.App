@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import za.co.westcoastexplorers.R;
 import za.co.westcoastexplorers.exploreapp.controller.FireBaseController;
 import za.co.westcoastexplorers.exploreapp.models.Attraction;
+import za.co.westcoastexplorers.exploreapp.models.Station;
 
 /**
  * Created by rikus on 2017/05/09.
@@ -64,11 +65,11 @@ public class Stations extends AppCompatActivity implements OnMapReadyCallback {
         final LatLngBounds.Builder latLngBoundsBuilder = new LatLngBounds.Builder();
         final ArrayList<LatLng> latLngs = new ArrayList<>();
 
-        for (Attraction attraction : FireBaseController.getInstance().getAttractions()){
-            LatLng latLng = new LatLng(attraction.lat, attraction.lng);
+        for (Station station : FireBaseController.getInstance().getStations()){
+            LatLng latLng = new LatLng(station.lat, station.lng);
             latLngs.add(latLng);
             latLngBoundsBuilder.include(latLng);
-            MarkerOptions marker = new MarkerOptions().position(latLng).title(attraction.name).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+            MarkerOptions marker = new MarkerOptions().position(latLng).title(station.name).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
             mMap.addMarker(marker);
         }
 
