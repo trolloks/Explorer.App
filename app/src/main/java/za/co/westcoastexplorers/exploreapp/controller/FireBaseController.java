@@ -63,6 +63,8 @@ public class FireBaseController {
                                 item1.lng = (Double)hashMap.get("lng");
                             if (hashMap.containsKey("id") && hashMap.get("id") instanceof String)
                                 item1.id = (String)hashMap.get("id");
+                            if (hashMap.containsKey("group") && hashMap.get("group") instanceof String)
+                                item1.group = (String)hashMap.get("group");
                             if (hashMap.containsKey("placeid") && hashMap.get("placeid") instanceof String)
                                 item1.placeId = (String)hashMap.get("placeid");
                             if (hashMap.containsKey("thumbnailurl") && hashMap.get("thumbnailurl") instanceof String)
@@ -112,6 +114,21 @@ public class FireBaseController {
 
     public ArrayList<Attraction> getAttractions(){
         return (mAttractions == null ? new ArrayList<Attraction>() : mAttractions);
+    }
+
+    public ArrayList<Attraction> getAttractions(String filter, Object by){
+        ArrayList<Attraction> tempAttractions = new ArrayList<>();
+        for (Attraction attraction : getAttractions()){
+            if (filter.equals("group") && attraction.group.equals(by)){
+                tempAttractions.add(attraction);
+            }
+
+            if (filter.equals("name") && attraction.name.equals(by)){
+                tempAttractions.add(attraction);
+            }
+        }
+
+        return tempAttractions;
     }
 
     public interface FireBaseListener{

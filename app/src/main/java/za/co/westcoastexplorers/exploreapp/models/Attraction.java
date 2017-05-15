@@ -15,6 +15,7 @@ public class Attraction {
     public String number;
     public String description;
     public String id;
+    public String group = "";
     public String placeId;
     public double lat;
     public double lng;

@@ -20,6 +20,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -148,5 +149,17 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         } else if (!latLngs.isEmpty()) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngs.get(0), 14));
         }
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                ArrayList <Attraction> attractions = FireBaseController.getInstance().getAttractions("name", marker.getTitle());
+                for (Attraction attraction : attractions){
+                    if (attraction.clickListener != null && mRecyclerView != null)
+                        attraction.clickListener.onClick(mRecyclerView);
+                }
+                return false;
+            }
+        });
     }
 }
