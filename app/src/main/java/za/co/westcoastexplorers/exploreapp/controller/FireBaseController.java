@@ -70,6 +70,12 @@ public class FireBaseController {
                                     item1.lng = (Double)hashMap.get("lng");
                                 if (hashMap.containsKey("id") && hashMap.get("id") instanceof String)
                                     item1.id = (String)hashMap.get("id");
+                                if (hashMap.containsKey("facilities") && hashMap.get("facilities") instanceof String)
+                                    item1.facilities = (String)hashMap.get("facilities");
+                                if (hashMap.containsKey("number") && hashMap.get("number") instanceof String)
+                                    item1.number = (String)hashMap.get("number");
+                                if (hashMap.containsKey("website") && hashMap.get("website") instanceof String)
+                                    item1.website = (String)hashMap.get("website");
                                 if (hashMap.containsKey("group") && hashMap.get("group") instanceof String)
                                     item1.group = (String)hashMap.get("group");
                                 if (hashMap.containsKey("placeid") && hashMap.get("placeid") instanceof String)

@@ -45,6 +45,72 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
 
         setTitle(mAttraction.name);
 
+        boolean hasDetails = false;
+
+        // set number
+        AppCompatTextView number = (AppCompatTextView)findViewById(R.id.number);
+        if (mAttraction.number != null && !mAttraction.number.isEmpty() && number.getText().toString().isEmpty()) {
+            number.setText(mAttraction.number);
+            final CharSequence finalNumber = mAttraction.number;
+            number.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(Intent.ACTION_CALL);
+                    i.setData(Uri.parse("tel:" + finalNumber.toString()));
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                }
+            });
+            hasDetails = true;
+            findViewById(R.id.numbercontainer).setVisibility(View.VISIBLE);
+        }
+
+        // set web
+        AppCompatTextView web = (AppCompatTextView)findViewById(R.id.website);
+        if (mAttraction.website != null && !mAttraction.website.isEmpty() && web.getText().toString().isEmpty()) {
+            web.setText(mAttraction.website);
+            final Uri finalWebsite = Uri.parse(mAttraction.website);
+            web.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(finalWebsite);
+                    startActivity(i);
+                }
+            });
+            hasDetails = true;
+            findViewById(R.id.websitecontainer).setVisibility(View.VISIBLE);
+        }
+
+        // set facility
+        if (mAttraction.facilities != null && !mAttraction.facilities.isEmpty() && mAttraction.facilities.length() == 4) {
+            if (mAttraction.facilities.charAt(0) == '1'){
+                findViewById(R.id.facBike).setVisibility(View.VISIBLE);
+            }
+
+            if (mAttraction.facilities.charAt(1) == '1'){
+                findViewById(R.id.facCard).setVisibility(View.VISIBLE);
+            }
+
+            if (mAttraction.facilities.charAt(2) == '1'){
+                findViewById(R.id.facVoucher).setVisibility(View.VISIBLE);
+            }
+
+            if (mAttraction.facilities.charAt(3) == '1'){
+                findViewById(R.id.facWifi).setVisibility(View.VISIBLE);
+            }
+
+
+            hasDetails = true;
+            findViewById(R.id.facilitycontainer).setVisibility(View.VISIBLE);
+        }
+
+
+        if (hasDetails)
+            findViewById(R.id.detailsheader).setVisibility(View.VISIBLE);
+
+        final boolean finalDetails = hasDetails;
+
         if (mAttraction.placeId != null) {
             try {
                 mGoogleApiClient = new GoogleApiClient
@@ -61,8 +127,7 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
                             final Place myPlace = places.get(0);
                             Log.i("PLACES", "Place found: " + myPlace.getName());
 
-                            findViewById(R.id.detailsheader).setVisibility(View.VISIBLE);
-                            boolean hasDetails = false;
+                            boolean hasDetails = finalDetails;
 
                             // set address
                             AppCompatTextView address = (AppCompatTextView)findViewById(R.id.address);
@@ -74,7 +139,7 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
 
                             // set number
                             AppCompatTextView number = (AppCompatTextView)findViewById(R.id.number);
-                            if (myPlace.getPhoneNumber() != null) {
+                            if (myPlace.getPhoneNumber() != null && number.getText().toString().isEmpty()) {
                                 number.setText(myPlace.getPhoneNumber());
                                 final CharSequence finalNumber = myPlace.getPhoneNumber();
                                 number.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +157,7 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
 
                             // set web
                             AppCompatTextView web = (AppCompatTextView)findViewById(R.id.website);
-                            if (myPlace.getWebsiteUri() != null) {
+                            if (myPlace.getWebsiteUri() != null && web.getText().toString().isEmpty()) {
                                 web.setText(myPlace.getWebsiteUri().toString());
                                 final Uri finalWebsite = myPlace.getWebsiteUri();
                                 web.setOnClickListener(new View.OnClickListener() {

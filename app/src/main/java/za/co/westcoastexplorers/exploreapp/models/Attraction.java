@@ -13,6 +13,7 @@ public class Attraction {
     public String name;
     public String website;
     public String number;
+    public String facilities;
     public String description;
     public String id;
     public String group = "";

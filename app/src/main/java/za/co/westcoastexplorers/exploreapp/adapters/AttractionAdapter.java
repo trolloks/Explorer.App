@@ -102,6 +102,7 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Si
 
         if (holder.iv != null){
             if (item.thumbnailURL != null) {
+                holder.iv.setImageBitmap(null);
                 ViewCompat.setHasTransientState(holder.v, true);
                 holder.p.setVisibility(View.VISIBLE);
                 AsyncTask<Void, Void, Bitmap> asyncTask = new AsyncTask<Void, Void, Bitmap>() {
@@ -120,6 +121,8 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Si
                     }
                 };
                 asyncTask.execute();
+            } else{
+                holder.iv.setImageBitmap(null);
             }
         }
 
