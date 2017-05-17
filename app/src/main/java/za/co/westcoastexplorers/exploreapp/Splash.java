@@ -21,7 +21,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 // loaded data
-                Intent intent = new Intent(Splash.this, Map.class);
+                Intent intent = new Intent(Splash.this, Tutorial.class);
                 startActivity(intent);
                 // don't come back to splash
                 finish();

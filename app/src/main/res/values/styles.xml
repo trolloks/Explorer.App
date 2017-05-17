@@ -17,4 +17,14 @@
         <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 
+    <!-- Splash activity theme. -->
+    <style name="InterimTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowBackground">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

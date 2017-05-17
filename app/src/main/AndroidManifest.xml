@@ -32,6 +32,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".exploreapp.Email"
+            android:theme="@style/InterimTheme"/>
+        <activity android:name=".exploreapp.Tutorial"
+            android:theme="@style/InterimTheme"/>
         <activity android:name=".exploreapp.Login"/>
         <activity android:name=".exploreapp.Map"/>
         <activity android:name=".exploreapp.Stations"/>

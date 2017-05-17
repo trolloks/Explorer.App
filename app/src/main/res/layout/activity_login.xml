@@ -22,14 +22,14 @@
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"/>
+                android:text="Voucher Number"/>
 
             <android.support.v7.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"/>
 
-            <android.support.v7.widget.AppCompatTextView
+         <!--   <android.support.v7.widget.AppCompatTextView
                 android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:maxLines="1"/>
+                android:maxLines="1"/>-->
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_marginTop="32dp"

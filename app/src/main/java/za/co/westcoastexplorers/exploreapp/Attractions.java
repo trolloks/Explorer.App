@@ -37,7 +37,7 @@ public class Attractions extends AppCompatActivity {
     SingleLineListAdapter mAdapter;
     ArrayList<SingleLineListItem> mItems;
 
-    public static final String [] ATTRACTION_GROUPS = new String[]{"Restaurant", "Accommodation", "Bicycle Station", ""}; // empty is for other
+    public static final String [] ATTRACTION_GROUPS = new String[]{"Restaurant", "Accommodation", "Retail", "Place of interest", "Bicycle trail", "Walking / Hiking trail", ""}; // empty is for other
     public static int [] mAttractionIcons = null;
 
     @Override
@@ -50,7 +50,7 @@ public class Attractions extends AppCompatActivity {
         mRecyclerView = (RecyclerView)findViewById(R.id.recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        mAttractionIcons = new int[]{R.drawable.ic_restaurant_black_24dp, R.drawable.ic_hotel_black_24dp, R.drawable.ic_directions_bike_black_24dp, R.drawable.ic_local_activity_black_24dp}; // empty is for other
+        mAttractionIcons = new int[]{R.drawable.ic_restaurant_black_24dp, R.drawable.ic_hotel_black_24dp, R.drawable.ic_local_activity_black_24dp, R.drawable.ic_local_activity_black_24dp, R.drawable.ic_directions_bike_black_24dp, R.drawable.ic_local_activity_black_24dp, R.drawable.ic_local_activity_black_24dp}; // empty is for other
 
         mItems = new ArrayList<>();
         for (final String group : ATTRACTION_GROUPS){
