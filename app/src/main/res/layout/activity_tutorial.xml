@@ -19,6 +19,11 @@
             android:layout_height="172dp"
             android:src="@drawable/binoculars"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
         <android.support.v7.widget.AppCompatTextView
             android:layout_marginTop="16dp"
             android:textColor="#FFFFFF"
@@ -30,24 +35,26 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="djoashdoi jijdsaio diojasiod asjdiasj doajdj aosidjioas jdoiajsdio asodijioasjdoijasiodjasiodj aisjdo iasdjoiasjd  djiaosdjaosidjioasjdiaj djioasdj ioasd"/>
 
+        <android.support.v7.widget.AppCompatButton
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="SKIP"/>
+
     </LinearLayout>
 
 
 
-    <android.support.v7.widget.AppCompatButton
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="SKIP"/>
+
 
 </RelativeLayout>
