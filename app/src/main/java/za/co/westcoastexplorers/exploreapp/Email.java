@@ -52,9 +52,9 @@ public class Email extends AppCompatActivity {
                 AppCompatCheckBox check = (AppCompatCheckBox)findViewById(R.id.check);
 
                 BackgroundMail.newBuilder(Email.this)
-                        .withUsername("rikuswlouw@gmail.com")
+                        .withUsername("wcexplorersclub@gmail.com")
                         .withPassword(getString(R.string.email_password))
-                        .withMailto("rikuswlouw@gmail.com")
+                        .withMailto("wcexplorersclub@gmail.com")
                         .withType(BackgroundMail.TYPE_PLAIN)
                         .withSubject("WCEC Signup")
                         .withBody("Hi!\n\nI just signed up to the WCEC App.\n\nI would " + (check.isChecked() ? "like" : "NOT like") + " to sign up for the newsletter.\n\nRegards\n\n" + email.getText())

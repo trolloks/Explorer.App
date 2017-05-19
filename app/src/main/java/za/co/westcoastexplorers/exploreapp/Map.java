@@ -87,7 +87,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         item3.clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Map.this, Vouchers.class);
+                Intent intent = new Intent(Map.this, VoucherLogin.class);
                 Map.this.startActivity(intent);
             }
         };
