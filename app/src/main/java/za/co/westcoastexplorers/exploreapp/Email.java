@@ -53,7 +53,7 @@ public class Email extends AppCompatActivity {
 
                 BackgroundMail.newBuilder(Email.this)
                         .withUsername("rikuswlouw@gmail.com")
-                        .withPassword("<password>")
+                        .withPassword(getString(R.string.email_password))
                         .withMailto("rikuswlouw@gmail.com")
                         .withType(BackgroundMail.TYPE_PLAIN)
                         .withSubject("WCEC Signup")
