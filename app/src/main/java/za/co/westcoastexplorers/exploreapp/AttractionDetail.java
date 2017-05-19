@@ -238,7 +238,7 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
 
         for (int i = 0; i < grantResults.length; i++){
             if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                if (permissions [i] == Manifest.permission.CALL_PHONE){
+                if (permissions [i].equals(Manifest.permission.CALL_PHONE)){
                     callPhone();
                 }
 
