@@ -86,16 +86,27 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mItems.add(item2);
 
         SingleLineListItem item3 = new SingleLineListItem();
-        item3.text = getString(R.string.home_member);
+        item3.text = getString(R.string.home_vouchers);
         item3.image = R.drawable.ic_lock_black_24dp;
         item3.clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Map.this, Login.class);
+                Intent intent = new Intent(Map.this, Vouchers.class);
                 Map.this.startActivity(intent);
             }
         };
         mItems.add(item3);
+
+        SingleLineListItem item4 = new SingleLineListItem();
+        item4.text = getString(R.string.home_member);
+        item4.image = R.drawable.ic_lock_black_24dp;
+        item4.clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            // do login
+            }
+        };
+        mItems.add(item4);
 
         mAdapter = new SingleLineListAdapter(this, mItems);
         mRecyclerView.setAdapter(mAdapter);

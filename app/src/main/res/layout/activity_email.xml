@@ -3,11 +3,63 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/button"
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_marginTop="16dp"
         android:layout_gravity="center"
+        android:layout_width="172dp"
+        android:layout_height="172dp"
+        android:src="@drawable/binoculars"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="Register your email"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/text_subheading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:text="Register your email to start your Yzerfontein adventure and redeem your vouchers"/>
+
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/email"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"/>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:layout_margin="16dp"
+        android:id="@+id/check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subscribe to our newsletter"/>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
         android:text="REGISTER"/>
 
 </LinearLayout>

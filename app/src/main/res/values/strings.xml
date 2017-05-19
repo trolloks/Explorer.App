@@ -4,5 +4,6 @@
     <!-- home page buttons -->
     <string name="home_attractions">Attractions</string>
     <string name="home_route">Bicycle Stations</string>
-    <string name="home_member">Members</string>
+    <string name="home_member">Members (coming soon)</string>
+    <string name="home_vouchers">Vouchers</string>
 </resources>
