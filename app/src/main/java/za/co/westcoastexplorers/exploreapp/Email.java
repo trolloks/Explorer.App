@@ -8,6 +8,8 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
+
 import za.co.westcoastexplorers.R;
 
 /**
@@ -42,19 +44,54 @@ public class Email extends AppCompatActivity {
                     return;
                 }
 
+                if (!isValidEmail(email.getText())){
+                    email.setError("Needs to be a valid email");
+                    return;
+                }
+
                 AppCompatCheckBox check = (AppCompatCheckBox)findViewById(R.id.check);
 
-                // set to cache
-                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean("skipEmail", true);
-                editor.apply();
+                BackgroundMail.newBuilder(Email.this)
+                        .withUsername("rikuswlouw@gmail.com")
+                        .withPassword("<password>")
+                        .withMailto("rikuswlouw@gmail.com")
+                        .withType(BackgroundMail.TYPE_PLAIN)
+                        .withSubject("WCEC Signup")
+                        .withBody("Hi!\n\nI just signed up to the WCEC App.\n\nI would " + (check.isChecked() ? "like" : "NOT like") + " to sign up for the newsletter.\n\nRegards\n\n" + email.getText())
+                        .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
+                            @Override
+                            public void onSuccess() {
+                                // set to cache
+                                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putBoolean("skipEmail", true);
+                                editor.apply();
 
-                Intent intent = new Intent(Email.this, Map.class);
-                startActivity(intent);
-                finish();
+                                Intent intent = new Intent(Email.this, Map.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .withOnFailCallback(new BackgroundMail.OnFailCallback() {
+                            @Override
+                            public void onFail() {
+                                //do some magic
+                            }
+                        })
+                        .send();
+
+
+
             }
         });
 
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
     }
 }
