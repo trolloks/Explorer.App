@@ -1,9 +1,12 @@
 package za.co.westcoastexplorers.exploreapp;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
@@ -31,6 +34,11 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
     private GoogleApiClient mGoogleApiClient;
     private Attraction mAttraction;
 
+    // permissions
+    int PERMISSIONCODE = 909;
+
+    String numberGlobal = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +63,8 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
             number.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(Intent.ACTION_CALL);
-                    i.setData(Uri.parse("tel:" + finalNumber.toString()));
-                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
+                    numberGlobal = finalNumber.toString();
+                    callPhone();
                 }
             });
             hasDetails = true;
@@ -145,10 +151,8 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
                                 number.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Intent i = new Intent(Intent.ACTION_CALL);
-                                        i.setData(Uri.parse("tel:" + finalNumber.toString()));
-                                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(i);
+                                        numberGlobal = finalNumber.toString();
+                                        callPhone();
                                     }
                                 });
                                 hasDetails = true;
@@ -201,6 +205,19 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
 
     }
 
+    private void callPhone (){
+        Intent i = new Intent(Intent.ACTION_CALL);
+        i.setData(Uri.parse("tel:" + numberGlobal));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        if (ActivityCompat.checkSelfPermission(AttractionDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(AttractionDetail.this, new String[]{Manifest.permission.CALL_PHONE}, 909);
+            return;
+        }
+
+        startActivity(i);
+    };
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
@@ -214,5 +231,23 @@ public class AttractionDetail extends AppCompatActivity implements GoogleApiClie
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        for (int i = 0; i < grantResults.length; i++){
+            if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                if (permissions [i] == Manifest.permission.CALL_PHONE){
+                    callPhone();
+                }
+
+                return;
+            }
+        }
+
+
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

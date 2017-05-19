@@ -43,10 +43,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     SingleLineListAdapter mAdapter;
     ArrayList<SingleLineListItem> mItems;
 
-    // permissions
-    int PERMISSIONCODE = 909;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
