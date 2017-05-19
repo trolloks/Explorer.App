@@ -17,6 +17,7 @@ import java.util.HashMap;
 import za.co.westcoastexplorers.exploreapp.AttractionDetail;
 import za.co.westcoastexplorers.exploreapp.models.Attraction;
 import za.co.westcoastexplorers.exploreapp.models.Station;
+import za.co.westcoastexplorers.exploreapp.models.Voucher;
 
 /**
  * Created by rikus on 2017/05/09.
@@ -28,6 +29,7 @@ public class FireBaseController {
 
     private ArrayList<Attraction> mAttractions;
     private ArrayList<Station> mStations;
+    private ArrayList<Voucher> mVouchers;
     private FireBaseListener mListener;
     private boolean firstTime = true;
 
@@ -39,6 +41,7 @@ public class FireBaseController {
 
         mAttractions = new ArrayList<>();
         mStations = new ArrayList<>();
+        mVouchers = new ArrayList<>();
         firstTime = true;
 
         // Read from the database
@@ -130,6 +133,19 @@ public class FireBaseController {
                         }
                     }
 
+                    if (data.containsKey("vouchers") && data.get("vouchers") instanceof ArrayList){
+                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>)data.get("vouchers");
+                        if (mVouchers != null) {
+                            mVouchers.clear();
+                            for (HashMap hashMap : arrayList){
+                                final Voucher item1 = new Voucher();
+                                if (hashMap.containsKey("id") && hashMap.get("id") instanceof String)
+                                    item1.id = (String)hashMap.get("id");
+                                mVouchers.add(item1);
+                            }
+                        }
+                    }
+
                 }
 
                 if (mListener != null && firstTime) {
@@ -168,6 +184,15 @@ public class FireBaseController {
 
     public ArrayList<Station> getStations(){
         return (mStations == null ? new ArrayList<Station>() : mStations);
+    }
+
+    public boolean isVoucherValid(String id){
+        for (Voucher voucher : mVouchers){
+            if(voucher.id != null && voucher.id.equals(id)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Attraction> getAttractions(String filter, Object by){

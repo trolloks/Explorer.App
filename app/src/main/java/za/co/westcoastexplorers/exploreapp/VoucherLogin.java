@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import za.co.westcoastexplorers.R;
+import za.co.westcoastexplorers.exploreapp.controller.FireBaseController;
 
 /**
  * Created by rikus on 2017/05/09.
@@ -31,7 +32,7 @@ public class VoucherLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppCompatEditText login = (AppCompatEditText)findViewById(R.id.login);
-                if (login.getText().length() == 0){
+                if (!FireBaseController.getInstance().isVoucherValid(login.getText().toString())){
                     login.setError("Invalid voucher");
                     return;
                 }
