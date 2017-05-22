@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:id="@+id/numbercontainer"
+                android:id="@+id/ratescontainer"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -44,23 +44,22 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Number"
+                    android:text="Rates"
                     android:textColor="#212121"
                     android:layout_marginRight="16dp"/>
 
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/number"
+                    android:id="@+id/rates"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="0848182112"
-                    android:textColor="@color/colorPrimary"/>
+                    android:text="R120/day"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/timescontainer"
+                android:id="@+id/specialscontainer"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -69,18 +68,18 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Business Hours"
+                    android:text="Special"
                     android:textColor="#212121"
                     android:layout_marginRight="16dp"/>
 
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/time"
+                    android:id="@+id/special"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="08h00 - 17h00"/>
+                    android:text="Ride FREE on your birthday"/>
             </LinearLayout>
 
 
