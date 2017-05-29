@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import za.co.westcoastexplorers.R;
+import za.co.westcoastexplorers.exploreapp.custom.SwipeProgress;
 import za.co.westcoastexplorers.exploreapp.utils.ViewGroupPagerAdapter;
 
 /**
@@ -62,6 +64,30 @@ public class Tutorial extends AppCompatActivity {
                 goNext();
             }
         });
+
+        final SwipeProgress swipeProgress = (SwipeProgress)findViewById(R.id.swipe);
+        swipeProgress.setSwipeCount(3);
+        swipeProgress.setColor(ContextCompat.getColor(Tutorial.this, R.color.colorAccent));
+        swipeProgress.setIndex(0);
+
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                swipeProgress.setIndex(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
         adapter.addViewGroup(tut3);
     }
 

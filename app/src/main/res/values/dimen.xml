@@ -3,5 +3,7 @@
 
     <dimen name="text_subheading">16sp</dimen>
 
-
+    <!-- intro circles -->
+    <dimen name="swipecircleradius">5dip</dimen>
+    <dimen name="swipecirclespacing">5dip</dimen>
 </resources>
