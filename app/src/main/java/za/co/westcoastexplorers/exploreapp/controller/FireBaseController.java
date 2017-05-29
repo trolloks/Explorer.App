@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 import za.co.westcoastexplorers.exploreapp.AttractionDetail;
 import za.co.westcoastexplorers.exploreapp.models.Attraction;
+import za.co.westcoastexplorers.exploreapp.models.Special;
 import za.co.westcoastexplorers.exploreapp.models.Station;
 import za.co.westcoastexplorers.exploreapp.models.Voucher;
 
@@ -30,6 +31,7 @@ public class FireBaseController {
     private ArrayList<Attraction> mAttractions;
     private ArrayList<Station> mStations;
     private ArrayList<Voucher> mVouchers;
+    private ArrayList<Special> mSpecials;
     private FireBaseListener mListener;
     private boolean firstTime = true;
 
@@ -42,6 +44,7 @@ public class FireBaseController {
         mAttractions = new ArrayList<>();
         mStations = new ArrayList<>();
         mVouchers = new ArrayList<>();
+        mSpecials = new ArrayList<>();
         firstTime = true;
 
         // Read from the database
@@ -146,6 +149,23 @@ public class FireBaseController {
                         }
                     }
 
+                    if (data.containsKey("specials") && data.get("specials") instanceof ArrayList){
+                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>)data.get("specials");
+                        if (mSpecials != null) {
+                            mSpecials.clear();
+                            for (HashMap hashMap : arrayList){
+                                final Special item1 = new Special();
+                                if (hashMap.containsKey("id") && hashMap.get("id") instanceof String)
+                                    item1.id = (String)hashMap.get("id");
+                                if (hashMap.containsKey("attractionId") && hashMap.get("attractionId") instanceof String)
+                                    item1.attractionId = (String)hashMap.get("attractionId");
+                                if (hashMap.containsKey("description") && hashMap.get("description") instanceof String)
+                                    item1.description = (String)hashMap.get("description");
+                                mSpecials.add(item1);
+                            }
+                        }
+                    }
+
                 }
 
                 if (mListener != null && firstTime) {
@@ -184,6 +204,10 @@ public class FireBaseController {
 
     public ArrayList<Station> getStations(){
         return (mStations == null ? new ArrayList<Station>() : mStations);
+    }
+
+    public ArrayList<Special> getSpecials(){
+        return (mSpecials == null ? new ArrayList<Special>() : mSpecials);
     }
 
     public boolean isVoucherValid(String id){
