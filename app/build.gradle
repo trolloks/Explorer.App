@@ -11,12 +11,27 @@ android {
         versionName "1.0"
         resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
     }
+
+    signingConfigs {
+        live {
+            storeFile file("explorerkey.jks")
+            storePassword "XXXXXXXXXXXXXXXXXXXXXXX"
+            keyAlias "explorer"
+            keyPassword "XXXXXXXXXXXXXXXXXXXXXXXXX"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
+            zipAlignEnabled true
+            signingConfig signingConfigs.live
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 
     repositories {
         maven { url "https://jitpack.io" }
