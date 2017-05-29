@@ -8,3 +8,6 @@
 /captures
 .externalNativeBuild
 app/src/main/res/values/passwords.xml
+app/explorerkey.jks
+app/app-release.apk
+app/app-release.zip
